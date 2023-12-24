@@ -1,0 +1,19 @@
+spin_manifest_version = 2
+
+[application]
+name = "foo"
+version = "0.1.0"
+authors = ["Seungjin Kim <seungjin@duck.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/..."
+component = "bar"
+
+[component.bar]
+source = "bar/target/wasm32-wasi/release/bar.wasm"
+allowed_outbound_hosts = []
+[component.bar.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "bar"
+watch = ["src/**/*.rs", "Cargo.toml"]
