@@ -12,8 +12,22 @@ component = "bar"
 
 [component.bar]
 source = "bar/target/wasm32-wasi/release/bar.wasm"
-allowed_outbound_hosts = []
+allowed_outbound_hosts = ["https://*:*", "http://*:*"]
 [component.bar.build]
 command = "cargo build --target wasm32-wasi --release"
 workdir = "bar"
+watch = ["src/**/*.rs", "Cargo.toml"]
+[component.bar.variables]
+dapr_url = "https://httpbin.org/anything"
+
+[[trigger.http]]
+route = "/test"
+component = "test1"
+
+[component.test1]
+source = "test1/target/wasm32-wasi/release/test1.wasm"
+allowed_outbound_hosts = ["https://*:*", "http://*:*"]
+[component.test1.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "test1"
 watch = ["src/**/*.rs", "Cargo.toml"]

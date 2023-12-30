@@ -1,21 +1,51 @@
-use anyhow::Result;
 use spin_sdk::{
-    http::{IntoResponse, Params, Request, Response, Router},
-    http_component,
+    http::{
+        send, IncomingResponse, IntoResponse, Json, Method, Params, Request, RequestBuilder,
+        Response, Router,
+    },
+    http_component, variables,
 };
-use url::Url;
 
-/// A simple Spin HTTP component.
+#[derive(serde::Deserialize, Debug)]
+struct Order {
+    name: String,
+}
+
 #[http_component]
-fn handle_bar(req: Request) -> anyhow::Result<impl IntoResponse> {
-    println!("Handling request to {:?}", req.header("spin-full-url"));
+async fn handle_route(req: Request) -> Response {
+    let mut router = Router::new();
+    router.get("/healthz", health);
+    router.post_async("/q-order-ingress", ingress);
+    router.handle(req)
+}
 
-    let u = req.uri();
-    println!("{u}");
-    let parsed_url = Url::parse(u)?;
+fn health(_req: Request, _param: Params) -> anyhow::Result<impl IntoResponse> {
+    Ok(Response::new(200, format!("Healthy")))
+}
 
-    Ok(http::Response::builder()
+async fn ingress(
+    req: http::Request<Json<Order>>,
+    _param: Params,
+) -> anyhow::Result<impl IntoResponse> {
+    let dapr_url = variables::get("dapr_url")?;
+
+    println!("name: {}", req.body().name);
+    println!("dapr_url: {}", dapr_url);
+
+    let request = RequestBuilder::new(Method::Post, dapr_url)
+        .method(Method::Post)
+        .body("xx")
+        .build();
+
+    let response: IncomingResponse = match send(request).await {
+        Ok(response) => response,
+        Err(_) => panic!("error when calling outbound binding"),
+    };
+
+    let status = response.status();
+    Ok(Response::builder()
         .status(200)
         .header("content-type", "text/plain")
-        .body("Hello, Fermyon")?)
+        .body(format!("response status: {status}"))
+        .build())
 }
