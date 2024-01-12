@@ -1,2 +1,7 @@
 main.wasm
 .spin/
+*~
+.idea/
+.vscode/
+target/
+.spin/
