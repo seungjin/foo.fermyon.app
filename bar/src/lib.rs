@@ -1,6 +1,6 @@
 use spin_sdk::{
     http::{IntoResponse, Params, Request, Response, Router},
-    http_component,
+    http_component, variables,
 };
 
 #[http_component]
@@ -9,6 +9,9 @@ async fn handle_route(req: Request) -> Response {
     for (key, value) in std::env::vars() {
         println!("{key}: {value}");
     }
+
+    let expected = variables::get("FOO_KEY").expect("could not get FOO_KEY");
+    println!("FOO_KEY from variables::get --> {expected:?}");
 
     let foo_key = std::env::var("FOO_KEY").unwrap();
     println!("FOO_KEY--->{foo_key}");
