@@ -10,10 +10,10 @@ async fn handle_route(req: Request) -> Response {
         println!("{key}: {value}");
     }
 
-    let expected = variables::get("FOO_KEY").expect("could not get FOO_KEY");
+    let expected = variables::get("foo_key").expect("could not get FOO_KEY");
     println!("FOO_KEY from variables::get --> {expected:?}");
 
-    let foo_key = std::env::var("FOO_KEY").unwrap();
+    let foo_key = std::env::var("FOO_KEY").expect("Getting var from sys env failed");
     println!("FOO_KEY--->{foo_key}");
 
     let mut router = Router::new();
