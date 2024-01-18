@@ -48,8 +48,15 @@ fn get_items(_req: Request, _: Params) -> anyhow::Result<impl IntoResponse> {
 fn post_item(req: http::Request<Json<Item>>, _params: Params) -> anyhow::Result<impl IntoResponse> {
     let c = Connection::open_default()?;
 
-    let values = [Value::Text(req.body().name.clone())];
-    c.execute("INSERT INTO ITEMS (NAME) VALUES (?)", values.as_slice())?;
+    let values = [
+        Value::Text(req.body().name.clone()),
+        Value::Text(req.body().lastname.clone()),
+    ];
+
+    c.execute(
+        "INSERT INTO ITEMS (NAME, LASTNAME) VALUES (?, ?)",
+        values.as_slice(),
+    )?;
 
     Ok(Response::builder().status(200).with_cors().body(()).build())
 }
