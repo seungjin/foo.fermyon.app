@@ -13,3 +13,8 @@ anyhow = "1"
 spin-sdk = { git = "https://github.com/fermyon/spin-rust-sdk", branch = "main" }
 multipart = "0.18"
 substring = "1.4"
+chrono = "0.4.31"
+hmac = "0.12.1"
+sha2 = "0.10"
+hex-literal = "0.4"
+hex = "0.4"
