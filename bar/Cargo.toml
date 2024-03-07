@@ -6,12 +6,17 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-crate-type = [ "cdylib" ]
+crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "1"
-http = "0.2"
-spin-sdk = { git = "https://github.com/fermyon/spin", branch = "main" }
-url = "*"
-
-[workspace]
+#spin-sdk = { git = "https://github.com/fermyon/spin-rust-sdk", branch = "main" }
+spin-sdk = { path = "../../../rust/spin-rust-sdk" }
+multipart = "0.18"
+substring = "1.4"
+chrono = "0.4.31"
+hmac = "0.12.1"
+sha2 = "0.10"
+hex-literal = "0.4"
+hex = "0.4"
+urlencoding = "2"
