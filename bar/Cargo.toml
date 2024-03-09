@@ -12,7 +12,7 @@ crate-type = ["cdylib"]
 anyhow = "1"
 #spin-sdk = { git = "https://github.com/fermyon/spin-rust-sdk", branch = "main" }
 spin-sdk = { path = "../../../rust/spin-rust-sdk" }
-multipart = "0.18"
+multipart-2021 = "0.19"
 substring = "1.4"
 chrono = "0.4.31"
 hmac = "0.12.1"
