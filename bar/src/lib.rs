@@ -2,7 +2,6 @@ use anyhow::bail;
 use anyhow::Result;
 use chrono::{DateTime, Utc};
 use hmac::{Mac, SimpleHmac};
-use multipart_2021::server::buf_redux::BufWriter;
 use multipart_2021::server::Multipart;
 use sha2::{Digest, Sha256};
 use spin_sdk::http::{IntoResponse, Method, Request, Response};
@@ -36,7 +35,7 @@ async fn handle_bar(req: Request) -> anyhow::Result<impl IntoResponse> {
 
     let mut mp: Multipart<&[u8]> = Multipart::with_body(body, boundary);
 
-    while let Some(mut field) = mp.read_entry().unwrap() {
+    while let Some(field) = mp.read_entry().unwrap() {
         //let s = String::from_utf8_lossy(data);
         let data: Result<Vec<u8>, std::io::Error> = field.data.bytes().collect();
         //let size_of_data = data.unwrap().len();
