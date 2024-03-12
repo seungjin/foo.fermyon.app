@@ -11,7 +11,7 @@ route = "/..."
 component = "bar"
 
 [component.bar]
-source = "bar/target/wasm32-wasi/release/bar.wasm"
+source = "target/wasm32-wasi/release/bar.wasm"
 allowed_outbound_hosts = []
 [component.bar.build]
 command = "cargo build --target wasm32-wasi --release"

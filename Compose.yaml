@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM scratch
+        COPY spin.toml /spin.toml
+        COPY target/wasm32-wasi/release/*.wasm /target/wasm32-wasi/release/
+        ENTRYPOINT ["/spin.toml"]
+      platforms:
+        - "wasi/wasm32"
+      #tags:
+      #  - "seungjin_spin_docker_test"
+    platform: wasi/wasm32
+    runtime: io.containerd.spin.v2
+    ports:
+      - 3000:80
+
+
+
+# docker build --platform=wasi/wasm32 --provenance=false -t hello_spin_docker:6 --load -f Containerfile .
+# docker run --runtime=io.containerd.spin.v2 --platform wasi/wasm32 hello_spin_docker:6
