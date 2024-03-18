@@ -1,3 +1,19 @@
+[package]
+name = "trigger-timer"
+version = "0.1.0"
+authors = ["Fermyon Engineering <engineering@fermyon.com>"]
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.68"
+clap = { version = "3.1.15", features = ["derive", "env"] }
+futures = "0.3.25"
+serde = "1.0.188"
+spin-app = { path = "../../rust/spin/crates/app" }
+spin-core = { path = "../../rust/spin/crates/core" }
+spin-trigger = { path = "../../rust/spin/crates/trigger" }
+tokio = { version = "1.11", features = ["full"] }
+tokio-scoped = "0.2.0"
+wasmtime = "18.0.1"
+
 [workspace]
-resolver = "2"
-members = ["bar"]
