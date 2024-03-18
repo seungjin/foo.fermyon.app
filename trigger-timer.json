@@ -1,0 +1,16 @@
+{
+    "name": "trigger-timer",
+    "description": "Run Spin components at timed intervals",
+    "homepage": "https://github.com/fermyon/spin/tree/main/examples/spin-timer",
+    "version": "0.1.0",
+    "spinCompatibility": ">=2.2",
+    "license": "Apache-2.0",
+    "packages": [
+        {
+            "os": "linux",
+            "arch": "amd64",
+            "url": "file:///var/home/seungjin/Works/wasm/spin-timer/trigger-timer.tar.gz",
+            "sha256": "6ab02654df93fef940c97fdbfedbb2801de907e68fd50fa4ecee66e6a8ba0280"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+spin_manifest_version = 2
+
+[application]
+name = "random-cafe"
+version = "0.1.0"
+authors = ["Seungjin Kim <seungjin@duck.com>"]
+description = ""
+
+[variables]
+google_api_key = { required = true, secret = true }
+mstdn_url = { required = true }
+mstdn_access_token = { required = true, secret = true }
+weighted_countries = { required = true }
+
+[application.trigger.timer]
+speedup = 2
+
+[[trigger.timer]]
+interval_secs = 30
+component = "random-cafe"
+
+[component.random-cafe]
+source = "target/wasm32-wasi/release/random_cafe.wasm"
+allowed_outbound_hosts = [
+    "https://maps.googleapis.com",
+    "https://kite.labs.seungjin.net",
+    "https://*.googleusercontent.com",
+]
+files = [{ source = "files/", destination = "/" }]
+[component.random-cafe.build]
+command = "cargo build --target wasm32-wasi --release"
+watch = ["src/**/*.rs", "Cargo.toml"]
+[component.random-cafe.variables]
+google_api_key = "{{ google_api_key }}"
+mstdn_url = "{{ mstdn_url }}"
+mstdn_access_token = "{{ mstdn_access_token }}"
+weighted_countries = "{{ weighted_countries }}"
