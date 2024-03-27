@@ -31,6 +31,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "http 0.2.12",
+ "spin-cron-sdk",
  "spin-sdk",
  "url",
 ]
@@ -382,6 +383,37 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "29ef1a0fa1e39ac22972c8db23ff89aea700ab96aa87114e1fb55937a631a0c9"
 dependencies = [
  "smallvec",
+]
+
+[[package]]
+name = "spin-cron-macro"
+version = "0.1.0"
+source = "git+https://github.com/fermyon/spin-trigger-cron.git?branch=main#e84c8658f007a734cfef81bb8c7c4e707a3a9d86"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "spin-cron-sdk"
+version = "0.1.0"
+source = "git+https://github.com/fermyon/spin-trigger-cron.git?branch=main#e84c8658f007a734cfef81bb8c7c4e707a3a9d86"
+dependencies = [
+ "spin-cron-macro",
+ "spin-executor",
+ "wit-bindgen",
+]
+
+[[package]]
+name = "spin-executor"
+version = "3.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2df1a5e2cc70a628c9ea6914770c234cc4a292218091e6707ae8be68b4a5de76"
+dependencies = [
+ "futures",
+ "once_cell",
+ "wit-bindgen",
 ]
 
 [[package]]

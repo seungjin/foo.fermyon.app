@@ -1,25 +1,18 @@
 use anyhow::Result;
-use spin_sdk::{
-    http::{IntoResponse, Request, Response},
-    http_component,
-};
-use url::Url;
+use spin_cron_sdk::{cron_component, Error, Metadata};
+use spin_sdk::http::{Request, Response};
 
-/// A simple Spin HTTP component.
-#[http_component]
-async fn handle_bar(req: Request) -> anyhow::Result<impl IntoResponse> {
-    println!("Handling request to {:?}", req.header("spin-full-url"));
-
-    let u = req.uri();
-    println!("{u}");
-    let parsed_url = Url::parse(u)?;
-
-    Ok(
-        Response::builder()
-        .status(200)
-        .header("content-type", "text/plain")
-        .body("Hello, I'm foo.spinapp.")
-            .build()
-    )
+#[cron_component]
+async fn handle_cron_event(metadata: Metadata) -> Result<(), Error> {
+    let _ = foo().await;
+    Ok(())
 }
 
+async fn foo() -> Result<()> {
+    let url = "https://reqbin.com/echo/get/json";
+    let resp: Response = spin_sdk::http::send(Request::get(url)).await.unwrap();
+
+    let a = resp.status();
+    println!("----{}", a);
+    Ok(())
+}

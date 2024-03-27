@@ -6,11 +6,11 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-crate-type = [ "cdylib" ]
+crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "1"
 http = "0.2"
 spin-sdk = { git = "https://github.com/fermyon/spin-rust-sdk", branch = "main" }
 url = "*"
-
+spin-cron-sdk = { git = "https://github.com/fermyon/spin-trigger-cron.git", branch = "main" }

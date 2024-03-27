@@ -6,14 +6,15 @@ version = "0.1.0"
 authors = ["Seungjin Kim <seungjin@duck.com>"]
 description = ""
 
-[[trigger.http]]
-route = "/..."
+
+[[trigger.cron]]
 component = "bar"
+cron_expression = "1/2 * * * * *"
 
 [component.bar]
 source = "target/wasm32-wasi/release/bar.wasm"
 allowed_outbound_hosts = []
 [component.bar.build]
-command = "cargo build --target wasm32-wasi --release"
+command = "cargo +1.73 build --target wasm32-wasi --release"
 workdir = "bar"
 watch = ["src/**/*.rs", "Cargo.toml"]
