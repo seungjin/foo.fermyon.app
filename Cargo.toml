@@ -1,3 +1,21 @@
-[workspace]
-resolver = "2"
-members = ["bar"]
+[package]
+name = "box"
+authors = ["Seungjin Kim <seungjin@duck.com>"]
+description = ""
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1"
+spin-sdk = { git = "https://github.com/fermyon/spin-rust-sdk", branch = "main" }
+wit-bindgen-rt = { version = "0.24.0", features = ["bitflags"] }
+
+
+[package.metadata.componenet]
+package = "seungjin:rock"
+
+[package.metadata.component.target.dependencies]
+"fermyon:hmac" = { path = "./rock/wit" }
