@@ -18,4 +18,4 @@ wit-bindgen-rt = { version = "0.24.0", features = ["bitflags"] }
 package = "seungjin:rock"
 
 [package.metadata.component.target.dependencies]
-"fermyon:hmac" = { path = "./rock/wit" }
+"fermyon:hmac" = { path = "../foo/wit" }

@@ -1,0 +1,10 @@
+package seungjin:foo@0.1.0;
+
+world foo {
+    export fortune;
+}
+
+interface fortune {
+    say: func() -> result<string, u32>;
+}
+

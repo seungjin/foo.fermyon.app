@@ -12,8 +12,11 @@ component = "box"
 
 [component.box]
 source = "service.wasm"
-allowed_outbound_hosts = []
+#allowed_outbound_hosts = ["http://www.yerkee.com:80"]
+allowed_outbound_hosts = ["http://*", "https://*"]
 [component.box.build]
 #command = "cargo build --target wasm32-wasi --release"
 command = "./build.sh"
 watch = ["src/**/*.rs", "Cargo.toml"]
+
+

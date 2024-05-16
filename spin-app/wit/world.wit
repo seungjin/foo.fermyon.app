@@ -1,5 +1,5 @@
 package seungjin:box@0.1.0;
 
 world rock {
-    import seungjin:rock/calc@0.1.0;
+    import seungjin:foo/fortune@0.1.0;
 }
