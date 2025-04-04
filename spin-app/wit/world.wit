@@ -1,5 +1,0 @@
-package seungjin:box@0.1.0;
-
-world rock {
-    import seungjin:foo/fortune@0.1.0;
-}

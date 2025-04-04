@@ -1,0 +1,22 @@
+[package]
+name = "cron-me"
+authors = ["Seungjin Kim <seungjin@duck.com>"]
+description = ""
+version = "0.0.0"
+edition = "2021"
+rust-version = "1.71"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1"
+serde = "1.0"
+serde_json = "1.0"
+#spin-sdk = { git = "https://github.com/spinframework/spin-rust-sdk.git", tag = "v3.1.0" }
+spin-cron-sdk = { git = "https://github.com/spinframework/spin-trigger-cron" }
+spin-sdk = "3.1.0"
+thiserror = "2.0.12"
+
+[workspace]
+
