@@ -28,10 +28,11 @@ component = "internal-service"
 ## Componenet
 [component.root]
 source = "wasm/root.wasm"
+allowed_outbound_hosts = ["http://internal-service.spin.internal"]
 
 [component.cron-me]
 source = "wasm/cron_me.wasm"
-allowed_outbound_hosts = ["http://internal-service.spin.internal"]
+# allowed_outbound_hosts = ["http://internal-service.spin.internal"]
 
 [component.internal-service]
 source = "wasm/internal_service.wasm"
