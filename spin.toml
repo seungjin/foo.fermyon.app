@@ -19,8 +19,8 @@ component = "cron-me"
 cron_expression = "*/3 * * * * *"
 
 [[trigger.http]]
-route = { private = true }
-# route = "/internal-service/..."
+# route = { private = true }
+route = "/internal-service/..."
 component = "internal-service"
 
 
@@ -28,7 +28,7 @@ component = "internal-service"
 ## Componenet
 [component.root]
 source = "wasm/root.wasm"
-allowed_outbound_hosts = ["http://internal-service.spin.internal"]
+# allowed_outbound_hosts = ["http://internal-service.spin.internal"]
 
 [component.cron-me]
 source = "wasm/cron_me.wasm"
