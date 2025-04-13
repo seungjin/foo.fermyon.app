@@ -2,6 +2,7 @@ use anyhow::Result;
 use spin_sdk::{
     http::{IntoResponse, Params, Request, Response, Router},
     http_component,
+    key_value::Store,
 };
 
 /// A simple Spin HTTP component.
@@ -11,13 +12,17 @@ async fn handle_root(req: Request) -> Result<impl IntoResponse> {
     // router.get("/", root_page);
     // router.get("/*", not_found_page);
     // router.handle(req)
-    //
-    //
     println!("Handling request to {:?}", req.header("spin-full-url"));
+
+    let store = Store::open_default()?;
+    store.set("mykey", b"myvalue")?;
+    let value = store.get("mykey")?;
+    let response = value.unwrap_or_else(|| "not found".into());
+
     Ok(Response::builder()
         .status(200)
         .header("content-type", "text/plain")
-        .body("Hello World!")
+        .body(response)
         .build())
 }
 

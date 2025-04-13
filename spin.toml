@@ -14,15 +14,6 @@ description = "foo"
 route = "/"
 component = "root"
 
-[[trigger.cron]]
-component = "cron-me"
-cron_expression = "*/3 * * * * *"
-
-[[trigger.http]]
-# route = { private = true }
-route = "/internal-service/..."
-component = "internal-service"
-
 
 ################################################################################
 ## Componenet
@@ -30,20 +21,9 @@ component = "internal-service"
 source = "wasm/root.wasm"
 # allowed_outbound_hosts = ["http://internal-service.spin.internal"]
 
-[component.cron-me]
-source = "wasm/cron_me.wasm"
-# allowed_outbound_hosts = ["http://internal-service.spin.internal"]
-
-[component.internal-service]
-source = "wasm/internal_service.wasm"
 
 ################################################################################
 ## Build
 [component.root.build]
 command = "cd apps/root; cargo build --target wasm32-wasip1 --release || exit ; cp target/wasm32-wasip1/release/root.wasm ../../wasm/"
 
-[component.cron-me.build]
-command = "cd apps/cron-me; cargo build --target wasm32-wasip1 --release || exit ; cp target/wasm32-wasip1/release/cron_me.wasm ../../wasm/"
-
-[component.internal-service.build]
-command = "cd apps/internal-service; cargo build --target wasm32-wasip1 --release || exit ; cp target/wasm32-wasip1/release/internal_service.wasm ../../wasm/"
